@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ScoreCard</title>
+        <link rel = "stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class = "container">
+
+            <div id="modal">
+                <div class ="modal-content" id="bat-modal">
+                    <form method="post" action = "newBatSubmit">
+                        <input type = "text" name="batName" placeholder="New Batsman Name">
+                        Batsman on strike : <input type = "checkbox" name="isOnStrike">
+                        <input onclick="closeModal('bat-modal')" type="submit" name="batSubmit" value="submit">
+                    </form>
+                    <button id = "close-modal" onclick = "closeModal('bat-modal')"> CLOSE &times </button>
+                </div>
+               <div class ="modal-content" id="bowl-modal">
+                    <form action = "/" method="post">
+                        <input type = "text" name="bowlName" placeholder="New Bowler Name">
+                        <input onclick="closeModal('bowl-modal')" type="submit" name="bowlSubmit" value="submit">
+                    </form>
+                     <button id = "close-modal" onclick = "closeModal('bowl-modal')"> CLOSE &times </button>
+                </div>
+               <div class = "modal-content" id="out-modal">
+                    <form action = "/" method = "post">
+                        Batsman out
+                        <select name="howOutBat">
+                            <option><%= batting[currBatsmen[0]].name %></option>
+                            <option><%= batting[currBatsmen[1]].name %></option>
+                        </select>
+
+                        How out:
+                        <select name = "howOut" onchange="howOutChange()" id ="howOutSelect">
+                            <option value = "bowled">Bowled</option>
+                            <option value = "caught">Caught</option>
+                            <option value = "runOut">Run Out</option>
+                            <option value = "stumped">Stumped</option>
+                        </select>
+                        <input name = "fielder" value="fielder name" id="howOutFielder" disabled>
+                        <p class = "text">Runs Scored</p>
+                        <select name = "runs" class="selRun">
+                            <option value = "0">0</option>
+                            <option value = "1">1</option>      
+                            <option value = "2">2</option>   
+                            <option value = "3">3</option>  
+                            <option value = "4">4</option>
+                            <option value = "5">5</option>
+                            <option value = "6">6</option>
+                        </select>
+                        <br><p class = "text">Extras </p>
+                        <select name = "extras" class = "selExtras">
+                            <option value = "none"></option>
+                            <option value = "wide">Wide</option>
+                            <option value = "no">No</option>
+                            <option value = "bye">Bye</option>
+                            <option value = "leg-bye">Leg Bye</option>
+                        </select> <br>
+
+                        <input type = "submit" name="outSubmit">
+                
+                    </form>
+                    
+                    <button onclick="closeModal('out-modal')">&times</button>
+                </div>
+            </div>
+
+
+            <div class = "batting">
+                    <div class = "scoreTab">
+                            <h1>
+                                    <%= `${totScore}/${playersCount[0]-2}` %>
+                            </h1>
+                            
+                        </div>
+                <table class = "battTable">
+                    <tr class = "batHeadRow">
+                        <th class = "batNum">Num</th>
+                        <th class = "name">Name</th>
+                        <th class = "run">6</th>
+                        <th class = "run">5</th>
+                        <th class = "run">4</th>
+                        <th class = "run">3</th>
+                        <th class = "run">2</th>
+                        <th class = "run">1</th>
+                        <th class = "run">0</th>
+                        <th class = "howOut">HowOut</th>
+                        <th class = "runs">RUNS</th>
+                    </tr> 
+                    <% for(let i=0; i<playersCount[0]; i++) { %>
+                        <tr class = <%= "batRow"+i %>>
+                            <% for(var key in batting[i]){
+                                if(key != '_id'  ) { %>
+                                        <td class = <%="batData"+key%> >
+                                            <%= batting[i][key] %>
+                                        </td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                    <% } %>    
+                </table> 
+
+       
+
+            <div class = "bowling">
+                <table class="bowlTable">
+                    <tr class = "bowlHeadRow">
+                        <th class ="bowlNum">Num</th>
+                        <th class = "bowlName">Name</th>
+                        <th class = "overs">O</th>
+                        <th class = "maiden">M</th>
+                        <th class = "runs">R</th>
+                        <th class = "wickets">W</th>
+                        <th class = "economy">E</th>
+                    </tr> 
+                    <% for(var i=0; i<playersCount[1]; i++) { %>
+                        <tr class = <%= "bowlRow"+i %> >
+                            <% for(var key in bowling[i]){
+                                if(key != '_id'  && key != 'balls') { %>
+                                        <td class= <%= "bowlData"+ key %>>
+                                            <%= bowling[i][key] %>
+                                        </td>
+                                <% } %>
+                            <% } %>
+                        </tr>
+                    <% } %>
+                </table> 
+                <div class="selBowler" >
+                    <form action = "/" method="POST">
+                        <div class = "selBowlerInside">
+                            <select name ="selectBowler" class="selBowl">
+                                <% for(var i=0; i<playersCount[1]; i++){ %>
+                                        <option>
+                                            <%= bowling[i]['name'] %>
+                                        </option>
+                                <% } %>
+                            </select>
+                            <input type = "submit" name="selectBowlerSubmit" value="Select Bowler">
+                        </div>
+                    
+                    </form>
+                </div>
+            </div>
+
+            <div class = "extras">
+                    <table>
+                        <tr style="background:grey; color: white">
+                            <th  style="width: 100px;">Wides</th>
+                            <th  style="width: 100px;">No Balls</th>
+                            <th  style="width: 100px;">Byes</th>
+                            <th  style="width: 100px;">Leg Byes</th>
+                        </tr>
+                        <tr>
+                            <% for(let i=0; i<extras.length; i++){ %>
+                                <td align="center">
+                                    <%= extras[i] %>
+                                </td>
+                            <% } %>
+                        </tr>
+                    </table>
+                </div> 
+
+        
+            <div class = "currSubmit">
+                <div class="inside">
+                    <div class = "left">
+                        <form action = "/" method="POST">
+                            <p class = "text">Runs Scored</p>
+                            <select name = "runs" class="selRun">
+                                <option value = "0">0</option>
+                                <option value = "1">2</option>      
+                                <option value = "2">2</option>   
+                                <option value = "3">3</option>  
+                                <option value = "4">4</option>
+                                <option value = "5">5</option>
+                                <option value = "6">6</option>
+                            </select>
+                            <br><p class = "text">Extras </p>
+                            <select name = "extras" class = "selExtras">
+                                <option value = "none"></option>
+                                <option value = "wide">Wide</option>
+                                <option value = "no">No</option>
+                                <option value = "bye">Bye</option>
+                                <option value = "leg-bye">Leg Bye</option>
+                            </select> <br>
+                            <input type = "submit" name="runSubmit"><br>
+                        </form>
+                    </div>
+                    <div class = "right">
+                        <button id="addNewBatButt" onclick="showBatModal()">Add New Batsman</button>
+                        <button id="addNewBowlButt" onclick="showBowlModal()">Add New Bowler</button>
+                        <button onclick="showOutModal()">Out</button>
+                    </div>
+                </div>
+                
+            </div>
+           
+        </div>
+    </body>
+
+
+    <script>
+         let striker = "batRow"+ <%= currBatsmen[0] %> ;
+         let nonStriker = "batRow"+ <%= currBatsmen[1] %> ;
+         let currBowler = "bowlRow" + <%= currBowler %>;
+         document.getElementsByClassName(striker)[0].style.background = "#d4d4d4";
+         document.getElementsByClassName(nonStriker)[0].style.background = '#eeeeee';
+         document.getElementsByClassName(currBowler)[0].style.background = "#d4d4d4";
+
+         const showBatModal = ()=>{
+             document.getElementById("modal").style.display = 'block';
+             document.getElementById("bat-modal").style.display = 'block';
+         }
+
+         const showBowlModal = ()=>{
+             document.getElementById("modal").style.display = 'block';
+             document.getElementById("bowl-modal").style.display = 'block';
+         }
+
+         const showOutModal = ()=>{
+             document.getElementById("modal").style.display = 'block';
+             document.getElementById("out-modal").style.display = 'block';
+         }
+
+         const closeModal = (modalName)=>{
+             document.getElementById("modal").style.display = 'none';
+             document.getElementById(modalName).style.display = 'none';
+         }
+
+         const howOutChange = ()=>{
+             let howOut = document.getElementById('howOutSelect');
+             if(howOut.value == 'caught' || howOut.value == 'runOut'){
+                 document.getElementById('howOutFielder').disabled = false;
+             }else{
+                document.getElementById('howOutFielder').disabled = true;
+             }
+         }
+
+         window.onclick = (event)=>{
+            if(event.target.id == 'modal'){
+                document.getElementById('modal').style.display = 'none';
+                document.getElementById('bat-modal').style.display = 'none';
+                document.getElementById('bowl-modal').style.display = 'none';
+                document.getElementById('out-modal').style.display = 'none';
+            }
+
+            
+         }
+    
+    </script>
+</html>

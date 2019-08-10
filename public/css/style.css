@@ -1,0 +1,194 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Century Gothic';
+}
+.selBowler , .selBatsman{
+    margin-top: 2px;
+    text-align: center;
+}
+.selBowlerInside, .selBatsmanInside{
+    width:35%;
+    margin: auto;
+}
+.container{
+    display:flex;
+    flex-direction: column;
+    margin-left: 20vw;
+    margin-right: 20vw;
+    border: 2px solid grey;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#modal{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    left:0;
+    top:0;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    z-index: 99;
+}
+.modal-content{
+    height: 60vh;
+    width: 50vw;
+    position: relative;
+    margin: auto;
+    margin-top: 25vh;
+    background: white;
+    color: black;
+    display: none;
+}
+
+/****************************************************************************************************************/
+
+.scoreTab{
+    width: 30%;
+    margin: auto;
+    text-align: center;
+    background: grey;
+    color: white;
+    margin-bottom: 60px;
+    height: 50px;
+    line-height: 50px;
+}
+
+/****************************************************************************************************************/
+
+.invis{
+    display: none;
+}
+
+/********************** BATTTING ********************** */
+.batting, .bowling{
+    margin-top: 10px;
+    margin-bottom: 50px;
+    padding: 20;
+    font-size: 17px;
+
+}
+.battTable, .bowlTable{
+    padding: 10px;
+    border-collapse: collapse;
+    width:80%;
+    margin:auto;
+
+}
+
+.batNum{
+    text-align: center;
+    width: 8%;
+}
+.run{
+    width: 30px;
+    text-align: center;
+}
+.name{
+    text-align: left;
+    width:20%;
+}
+
+.batData6s, .batData5s, .batData4s, .batData3s, .batData2s, .batData1s, .batData0s, .batDatanum{
+    width: 5%;
+    text-align: center;
+}
+.batDatahowOut{
+    width: 30%;
+}
+.batDataruns{
+    text-align: center;
+}
+.batHeadRow , .bowlHeadRow{
+    background:grey;
+    color: white;
+}
+
+/************************** BOWWWWWWLINGGGG **************** */
+.bowlName{
+    text-align: left;
+}
+.bowlNum{
+    text-align: left;
+    width: 8%;
+}
+
+.bowlDataovers, .bowlDatamaidens, .bowlDataeconomy, .bowlDatawickets, .bowlDataruns, .bowlDatanum{
+    text-align: center;
+}
+
+/****************************************************************************************************************/
+
+.currSubmit{
+    width: 100%;
+    font-size: 20px;
+    padding: 10px;
+  
+}
+
+.currSubmit .inside{
+    display:flex;
+    flex-direction: row;
+    width:80%;
+    margin:auto;
+}
+
+.inside .left{
+    margin-left: 5%;
+    width:50%;
+    border-right: 1px solid grey;
+}
+.inside .right{
+    width:50%;
+    margin-left: 20px;
+}
+
+
+.currSubmit .text{
+    display: inline-block;
+    width: 150px;
+    
+}
+
+.selBowl{
+    width: 154px;
+    margin-top: 10px;
+}
+.selRun{
+    width: 120px;
+}
+.selExtras{
+    width: 120px;
+}
+
+select{
+    color: black;
+    background: white;
+}
+option{
+    width: 150px;
+}
+input[type='submit']{
+    border: none;
+    height: 30px;
+    width: 100px;
+    background: grey;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 2px;
+
+}
+
+
+/****************************************************************************************/
+.extras{
+    width: 80%;
+    margin: auto;
+}
+.extras table{
+    margin: auto;
+    margin-bottom: 50px;
+    border-collapse: collapse;
+}

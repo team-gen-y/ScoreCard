@@ -1,0 +1,15 @@
+ <% /*
+            <div class="selBatsman" >
+                    <form action = "/" method="POST">
+                        <div class = "selBatsmanInside">
+                            <select name ="selectStriker" class="selBat">
+                               <option> <%= batting[currBatsmen[1]].name %></option>
+                               <option> <%= batting[currBatsmen[0]].name %> </option>
+                            </select>
+                            <input type = "submit" name="selectStrikerSubmit" value="Select Striker">
+                        </div>
+                    
+                    </form>
+                </div>
+            </div>
+        */ %>
